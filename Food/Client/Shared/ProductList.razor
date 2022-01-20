@@ -1,0 +1,53 @@
+﻿@using Food.Shared
+
+<ul class="list-unstyled">
+    @foreach(var product in products)
+            {
+                <li class="media my-3">
+                    <div class="media-img-wrapper mr-2">
+                        <a href="/product/@product.Id">
+                            <img class="media-img" src="@product.Image" alt="@product.Title" />
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <a href="/product/@product.Id">
+                            <h4 class="mb-0">@product.Title</h4>
+                        </a>
+                        <p>@product.Description</p>
+                        @if(product.OriginalPrice > product.Price)
+                         {
+                            <h6 class="text-muted original-price">@product.OriginalPrice zł</h6> 
+                            }
+                        <h5 class="price">
+                            @product.Price zł
+                        </h5>
+                    </div>
+                </li>
+            }
+</ul>
+
+@code {
+    List<Product> products = new List<Product>
+    {
+        new Product{
+        Id = 1,
+        CategoryID = 1,
+        Title = "Kiebab na cienkim",
+        Description = "asasd",
+        Image="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=400",
+        Price = 9.99m,
+        OriginalPrice = 19.99m,
+        },
+        new Product
+        {
+            Id = 7,
+            CategoryID = 3,
+            Title = "Burgir",
+            Description = "asasdasdads",
+            Image="",
+            Price = 8.19m,
+            OriginalPrice = 29.99m,
+        }
+        };
+}
+}
