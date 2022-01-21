@@ -20,9 +20,10 @@ namespace Food.Client.Services.ProductService
         {
             _http = http;
         }
+
         public async Task LoadProducts(string categoryUrl = null)
         {
-            if(categoryUrl == null)
+            if (categoryUrl == null)
             {
                 Products = await _http.GetFromJsonAsync<List<Product>>("api/Product");
             }
@@ -30,14 +31,17 @@ namespace Food.Client.Services.ProductService
             {
                 Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product/Category/{categoryUrl}");
             }
-           
             OnChange.Invoke();
         }
 
         public async Task<Product> GetProduct(int id)
         {
             return await _http.GetFromJsonAsync<Product>($"api/Product/{id}");
-  
+        }
+
+        public async Task<List<Product>> SearchProducts(string searchText)
+        {
+            return await _http.GetFromJsonAsync<List<Product>>($"api/Product/Search/{searchText}");
         }
     }
 }

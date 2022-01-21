@@ -10,13 +10,15 @@ namespace Food.Client.Services.CategoryService
 {
     public class CategoryService : ICategoryService
     {
+        private readonly HttpClient _http;
+
         public List<Category> Categories { get; set; } = new List<Category>();
 
-        private readonly HttpClient _http;
         public CategoryService(HttpClient http)
         {
             _http = http;
         }
+
         public async Task LoadCategories()
         {
             Categories = await _http.GetFromJsonAsync<List<Category>>("api/Category");

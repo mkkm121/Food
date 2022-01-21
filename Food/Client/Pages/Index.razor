@@ -1,8 +1,8 @@
 ﻿@page "/"
 @page "/{categoryurl}"
-@inject ICategoryService CategoryService
+@inject ICategoryService CategoryService;
 @inject IProductService ProductService
-
+@inject ISyncLocalStorageService LocalStorage
 
 @if (category != null)
 {
@@ -11,10 +11,16 @@
 }
 else
 {
+    <AuthorizeView>
+        <NotAuthorized>
+            <h1>Welcome to our restaurant!</h1>
+        </NotAuthorized>
+        <Authorized>
+            <h1>Welcome back, @LocalStorage.GetItemAsString("username")!</h1>
+        </Authorized>
+    </AuthorizeView>
     <ProductList />
 }
-
-
 
 @code
 {
@@ -26,10 +32,10 @@ else
     protected override async Task OnParametersSetAsync()
     {
         await ProductService.LoadProducts(CategoryUrl);
+
         if (CategoryUrl != null)
         {
             category = CategoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
-
         }
         else
         {

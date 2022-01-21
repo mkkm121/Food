@@ -35,5 +35,11 @@ namespace Food.Server.Services.ProductService
             return await _context.Products.Where(p => p.CategoryID == category.Id).ToListAsync();  
         }
 
+        public async Task<List<Product>> SearchProducts(string searchText)
+        {
+            return await _context.Products
+                .Where(p => p.Title.Contains(searchText) || p.Description.Contains(searchText))
+                .ToListAsync();
+        }
     }
 }
