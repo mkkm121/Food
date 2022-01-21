@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -21,13 +21,23 @@ a, .btn-link {
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
-.media-img{
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+.media-img {
     max-height: 200px;
     max-width: 200px;
     border-radius: 6px;
     margin-bottom: 10px;
     transition: transform .2s;
 }
+
 .media-img-big {
     max-height: 500px;
     max-width: 500px;
@@ -35,18 +45,20 @@ a, .btn-link {
     margin-bottom: 10px;
 }
 
-.media-img:hover{
-    transform: scale(1.1);
-}
 .media-img-wrapper {
     width: 200px;
     height: 200px;
     text-align: center;
 }
+
 .media-img-big-wrapper {
     width: 500px;
     height: 500px;
     text-align: center;
+}
+
+.media-img:hover {
+    transform: scale(1.1);
 }
 
 .original-price {
@@ -55,13 +67,6 @@ a, .btn-link {
 
 .price {
     color: green;
-}
-.invalid {
-    outline: 1px solid red;
-}
-
-.validation-message {
-    color: red;
 }
 
 #blazor-error-ui {
@@ -83,18 +88,18 @@ a, .btn-link {
         top: 0.5rem;
     }
 
-
-@media (max-width: 1023.90px){
-    .media{
+@media (max-width: 1023.98px) {
+    .media {
         flex-direction: column;
     }
 
-    .media-img-big-wrapper, .media-img-wrapper{
+    .media-img-big-wrapper, .media-img-wrapper {
         width: 100%;
         height: auto;
         text-align: center;
     }
-    .media-img-big{
+
+    .media-img-big {
         max-width: 300px;
     }
 }
