@@ -18,11 +18,13 @@
                     <div class="item-name">
                         <h5><a href="/product/@item.ProductId">@item.ProductTitle</a></h5>
                         <span>@item.EditionName</span><br />
-                        <button class="btn-delete" @onclick="@(() => DeleteItem(item))">Delete</button>
-                        <EditForm Model="item">
+                     <div class="cart_row">
+                        <EditForm Model="item" style="width: 100px">
                             <InputNumber id="quantity" @bind-Value="item.Quantity"
                                          class="form-control" style="width: 70px" />
                         </EditForm>
+                        <RadzenButton Click=@(args => DeleteItem(item)) Icon="delete" ButtonStyle="ButtonStyle.Danger" />
+                    </div>
                     </div>
                     <div class="item-price">$@(item.Price * item.Quantity)</div>
                 </div>
@@ -31,7 +33,7 @@
                 Total (@cartItems.Count): $@cartItems.Sum(item => item.Price * item.Quantity)
             </div>
             <div style="text-align: center; margin-top: 10px;">
-                <button class="btn btn-primary btn-lg" @onclick="PlaceOrder">Place Order</button>
+                 <RadzenButton Click=@(args => PlaceOrder()) Text="Order" Icon="check" ButtonStyle="ButtonStyle.Success" />
             </div>
         </div>
     }

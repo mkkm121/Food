@@ -1,0 +1,20 @@
+{
+  "dataSources": [],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main",
+    "Register"
+  ],
+  "logo": "",
+  "name": "Food",
+  "navigation": [],
+  "pages": [],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": null,
+  "theme": "standard",
+  "wasm": true
+}

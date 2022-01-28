@@ -1,6 +1,5 @@
 ﻿@inject IProductService ProductService
 @implements IDisposable
-
 <ul class="list-unstyled">
     @foreach (var product in ProductService.Products)
     {
@@ -49,4 +48,5 @@
         decimal minPrice = variants.Min(v => v.Price);
         return $"Starting at ${minPrice}";
     }
+
 }

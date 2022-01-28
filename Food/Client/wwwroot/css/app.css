@@ -80,6 +80,10 @@ a, .btn-link {
     width: 100%;
     z-index: 1000;
 }
+.cart_row {
+    display: flex;
+    flex-direction: row;
+}
 
     #blazor-error-ui .dismiss {
         cursor: pointer;
@@ -103,3 +107,5 @@ a, .btn-link {
         max-width: 300px;
     }
 }
+
+

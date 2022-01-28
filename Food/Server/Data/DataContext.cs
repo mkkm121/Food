@@ -19,9 +19,10 @@ namespace Food.Server.Data
 
         public DbSet<Edition> Editions { get; set; }
 
+        public DbSet<UserRegister> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<ProductVariant>().HasKey(p=> new { p.ProductId, p.EditionId });
 
             modelBuilder.Entity<Category>().HasData(

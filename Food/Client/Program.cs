@@ -1,6 +1,7 @@
 using Food.Client.Services.CategoryService;
 using Food.Client.Services.ProductService;
 using Food.Client.Services.CartService;
+using Food.Client.Services.UserService;
 using Blazored.LocalStorage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -32,6 +33,7 @@ namespace Food.Client
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICartService, CartService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredToast();
             builder.Services.AddOptions();

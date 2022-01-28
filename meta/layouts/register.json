@@ -1,0 +1,9 @@
+{
+  "components": [
+    {
+      "type": "body",
+      "name": "body0"
+    }
+  ],
+  "name": "Register"
+}

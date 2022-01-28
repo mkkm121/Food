@@ -2,29 +2,54 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthStateProvider
+@using Food.Shared
+@using Food.Client.Pages
 
-<h3>Login</h3>
-
-<EditForm Model="user" OnSubmit="HandleLogin">
+<EditForm Model="User" OnValidSubmit="OnChange">
+    <DataAnnotationsValidator />
     <div class="form-group">
-        <label for="username">Username</label>
-        <InputText id="username" @bind-Value="user.Username" class="form-control" />
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="User.Email" class="form-control"></InputText>
+        <ValidationMessage For="@(() => User.Email)" />
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <InputText id="password" @bind-Value="user.Password" type="password" class="form-control" />
+        <InputText id="password" type="password" @bind-Value="User.Password" class="form-control"></InputText>
+        <ValidationMessage For="@(() => User.Password)" />
+
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <RadzenButton Click=@(args => OnRegister()) Text="Register" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" />
+    <button type="submit" class="btn btn-primary" onclick="OnRegister">Login</button>
 </EditForm>
 
-@code {
-    private User user = new User();
 
-    private async void HandleLogin()
+
+@code {
+   // public User User { get; set; } = new User();
+    public UserLogin User { get; set; } = new UserLogin();
+
+    private async void HandleLogin(LoginArgs args, string announcement)
     {
-        Console.WriteLine("Log me in!");
-        await LocalStorage.SetItemAsync<string>("username", user.Username);
+        await LocalStorage.SetItemAsync<string>("username", args.Username);
         await AuthStateProvider.GetAuthenticationStateAsync();
         NavigationManager.NavigateTo("");
+    }
+
+    void OnRegister()
+    {
+        NavigationManager.NavigateTo("/register");
+        //Console.WriteLine($"{name} -> Register");
+    }
+
+    void OnResetPassword(string value, string name)
+    {
+       // Console.WriteLine($"{name} -> ResetPassword for user: {value}");
+    }
+
+      void OnChange()
+    {
+
+        Console.WriteLine("xxxxxxxx");
+        Console.WriteLine(User.Email);
     }
 }
