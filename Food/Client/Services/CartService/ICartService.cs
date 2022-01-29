@@ -15,5 +15,7 @@ namespace Food.Client.Services.CartService
         Task EmptyCart();
 
         Task CreateCart();
+
+        Task<string> Checkout();
     }
 }

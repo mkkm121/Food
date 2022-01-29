@@ -1,5 +1,6 @@
 ﻿@page "/cart"
 @inject ICartService CartService
+@inject NavigationManager navigationManager
 
 @if (!orderPlaced)
 {
@@ -78,7 +79,9 @@ else
 
     private async Task PlaceOrder()
     {
-        orderPlaced = true;
-        CartService.EmptyCart();
+        CartService.CreateCart();
+        string checkoutUrl = await CartService.Checkout();
+        navigationManager.NavigateTo(checkoutUrl);
+        await CartService.EmptyCart();
     }
 }

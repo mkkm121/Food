@@ -23,11 +23,13 @@ namespace Food.Client.Services.CartService
         public CartService(
             ILocalStorageService localStorage,
             IToastService toastService,
-            IProductService productService)
+            IProductService productService,
+            HttpClient http)
         {
             _localStorage = localStorage;
             _toastService = toastService;
             _productService = productService;
+            _http = http;
         }
 
         public async Task AddToCart(CartItem item)
@@ -83,16 +85,21 @@ namespace Food.Client.Services.CartService
         }
         public async Task CreateCart()
         {
-            await _localStorage.RemoveItemAsync("cart");
             CustomerOrder order = new CustomerOrder { Id = 3, CustomerId = 1, OrderId = 12 };
             Console.WriteLine(order.PaymentMode);
             await _http.PostAsJsonAsync<CustomerOrder>("api/Cart", order);
-            OnChange.Invoke();
         }
         public async Task EmptyCart()
         {
             await _localStorage.RemoveItemAsync("cart");
             OnChange.Invoke();
+        }
+
+        public async Task<string> Checkout()
+        {
+            var result = await _http.PostAsJsonAsync("api/payment/checkout", await GetCartItems());
+            var url = await result.Content.ReadAsStringAsync();
+            return url;
         }
     }
 }
