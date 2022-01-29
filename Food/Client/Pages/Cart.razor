@@ -33,7 +33,7 @@
                 Total (@cartItems.Count): $@cartItems.Sum(item => item.Price * item.Quantity)
             </div>
             <div style="text-align: center; margin-top: 10px;">
-                 <RadzenButton Click=@(args => PlaceOrder()) Text="Order" Icon="check" ButtonStyle="ButtonStyle.Success" />
+                <RadzenButton Click=@(args => PlaceOrder()) Text="Order" Icon="check" ButtonStyle="ButtonStyle.Success" />
             </div>
         </div>
     }
@@ -62,6 +62,7 @@ else
 
 @code {
     List<CartItem> cartItems = new List<CartItem>();
+
     bool orderPlaced = false;
 
     protected override async Task OnInitializedAsync()
@@ -78,6 +79,6 @@ else
     private async Task PlaceOrder()
     {
         orderPlaced = true;
-        await CartService.EmptyCart();
+        CartService.EmptyCart();
     }
 }

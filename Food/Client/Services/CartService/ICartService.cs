@@ -13,5 +13,7 @@ namespace Food.Client.Services.CartService
         Task<List<CartItem>> GetCartItems();
         Task DeleteItem(CartItem item);
         Task EmptyCart();
+
+        Task CreateCart();
     }
 }

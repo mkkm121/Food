@@ -13,29 +13,19 @@ namespace Food.Client.Services.UserService
     {
         private readonly HttpClient httpClient;
         public List<UserLogin> user { get; set; } = new List<UserLogin>();
+        public event Action OnChange;
         public UserService(HttpClient httpClient) {
             this.httpClient = httpClient;
         }
         public async Task CreateUser(UserRegister user)
         {
-            Console.WriteLine(user.Name+"User service client");
-            using (HttpResponseMessage response = httpClient.PostAsJsonAsync<UserRegister>("api/User", user).Result)
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("Response");
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
-                   
-            }
-            
+            await httpClient.PostAsJsonAsync<UserRegister>("api/User", user);
+            OnChange.Invoke();
         }
         public async Task<UserRegister> LoginUser(string Email)
         {
             return await httpClient.GetFromJsonAsync<UserRegister>($"api/User/{Email}");
         }
+
     }
 }

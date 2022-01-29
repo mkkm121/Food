@@ -2,8 +2,11 @@
 @inject ILocalStorageService LocalStorage
 @inject AuthenticationStateProvider AuthStateProvider  
 
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Snackzen</a>
+<div style="display: flex; justify-content: center" class="top-row pl-4 navbar navbar-dark">
+    <div class="page_title text-center">
+        <h3>SNACKZEN</h3>
+        <div class="single_line"></div>
+    </div>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,9 +37,9 @@
                     </NavLink>
                 </NotAuthorized>
                 <Authorized>
-                    <a class="nav-link" @onclick="Logout" style="cursor: pointer">
+                    <NavLink class="nav-link" @onclick="Logout" style="cursor: pointer">
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
-                    </a>
+                    </NavLink>
                 </Authorized>
             </AuthorizeView>
         </li>

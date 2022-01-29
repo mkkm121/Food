@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace Food.Client.Services.CartService
 {
@@ -14,6 +16,7 @@ namespace Food.Client.Services.CartService
         private readonly ILocalStorageService _localStorage;
         private readonly IToastService _toastService;
         private readonly IProductService _productService;
+        private readonly HttpClient _http;
 
         public event Action OnChange;
 
@@ -78,7 +81,14 @@ namespace Food.Client.Services.CartService
             await _localStorage.SetItemAsync("cart", cart);
             OnChange.Invoke();
         }
-
+        public async Task CreateCart()
+        {
+            await _localStorage.RemoveItemAsync("cart");
+            CustomerOrder order = new CustomerOrder { Id = 3, CustomerId = 1, OrderId = 12 };
+            Console.WriteLine(order.PaymentMode);
+            await _http.PostAsJsonAsync<CustomerOrder>("api/Cart", order);
+            OnChange.Invoke();
+        }
         public async Task EmptyCart()
         {
             await _localStorage.RemoveItemAsync("cart");

@@ -7,5 +7,6 @@ namespace Food.Server.Services.UserService
     {
         Task AddNewUser(UserRegister user);
         Task<UserRegister> GetUser(string Email);
+
     }
 }

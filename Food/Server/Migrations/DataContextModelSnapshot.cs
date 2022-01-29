@@ -70,6 +70,42 @@ namespace Food.Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Food.Shared.CustomerOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentMode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CustomerOrders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            DateCreated = new DateTime(2022, 1, 29, 16, 10, 50, 442, DateTimeKind.Local).AddTicks(2472),
+                            OrderId = 1,
+                            PaymentMode = "Cart"
+                        });
+                });
+
             modelBuilder.Entity("Food.Shared.Edition", b =>
                 {
                     b.Property<int>("Id")
@@ -120,6 +156,30 @@ namespace Food.Server.Migrations
                             Id = 7,
                             Name = "With seafood"
                         });
+                });
+
+            modelBuilder.Entity("Food.Shared.OrderDetail", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ProductId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("Food.Shared.Product", b =>
@@ -686,6 +746,49 @@ namespace Food.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Taszkient",
+                            Email = "admin@admin.pl",
+                            Name = "admin",
+                            Password = "admin123",
+                            Phone = "123456789",
+                            PostCode = "21-123",
+                            Street = "kunickiego 12"
+                        });
+                });
+
+            modelBuilder.Entity("Food.Shared.CustomerOrder", b =>
+                {
+                    b.HasOne("Food.Shared.UserRegister", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Food.Shared.OrderDetail", b =>
+                {
+                    b.HasOne("Food.Shared.CustomerOrder", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Food.Shared.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Food.Shared.Product", b =>
@@ -716,6 +819,11 @@ namespace Food.Server.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Food.Shared.CustomerOrder", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Food.Shared.Product", b =>

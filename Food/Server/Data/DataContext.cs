@@ -13,7 +13,6 @@ namespace Food.Server.Data
         {
              
         }
-
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
 
@@ -21,15 +20,30 @@ namespace Food.Server.Data
 
         public DbSet<UserRegister> Users { get; set; }
 
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserRegister>(entity => {
                 entity.HasIndex(e => e.Email).IsUnique();
             });
+
+            modelBuilder.Entity<OrderDetail>().HasKey(p => new { p.ProductId, p.OrderId });
+
             modelBuilder.Entity<ProductVariant>().HasKey(p=> new { p.ProductId, p.EditionId });
 
+
+            modelBuilder.Entity<UserRegister>().HasData(
+               new UserRegister { Id = 1, Name = "admin", Password="admin123",Email="admin@admin.pl",Phone="123456789",Street="kunickiego 12",City="Taszkient",PostCode="21-123" }
+               );
+
+            modelBuilder.Entity<CustomerOrder>().HasData(
+                new CustomerOrder { Id =1 , CustomerId =1, OrderId= 1 }
+                        );
+
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Snacks", Url = "snacks", Icon = "snack" },
+                new Category { Id = 1, Name = "Snacks", Url = "snacks", Icon = "icecream" },
                 new Category { Id = 2, Name = "Dinners", Url = "dinners", Icon = "dinner" },
                 new Category { Id = 3, Name = "Suppers", Url = "suppers", Icon = "supper" },
                 new Category { Id = 4, Name = "Breakfasts", Url = "breakfasts", Icon = "breakfas" }

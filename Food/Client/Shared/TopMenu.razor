@@ -21,13 +21,11 @@
         Sorry, there weren't any products found.
     </NotFoundTemplate>
 </BlazoredTypeahead>
-
-<a href="cart" class="btn btn-info">
-    <i class="oi oi-cart"></i>
-    Cart
-    <span class="badge badge-pill badge-light">@GetProductCount()</span>
-</a>
-
+    <a href="cart" class="btn btn-info">
+        <i class="oi oi-cart"></i>
+        Cart
+        <span class="badge badge-pill badge-light">@GetProductCount()</span>
+    </a>
 
 @code {
     private Product selectedProduct;

@@ -6,7 +6,7 @@
 @using Food.Shared
 @using Food.Client.Pages
 
-<EditForm Model="User" OnValidSubmit="OnChange">
+<EditForm Model="User" OnValidSubmit="HandleLogin">
     <DataAnnotationsValidator />
     <div class="form-group">
         <label for="email">Email</label>
@@ -20,31 +20,40 @@
 
     </div>
     <RadzenButton Click=@(args => OnRegister()) Text="Register" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" />
-    <button type="submit" class="btn btn-primary">Login</button>
+    <RadzenButton ButtonType="ButtonType.Submit" Text="Login" Icon="login" ButtonStyle="ButtonStyle.Info" />
 </EditForm>
 
 
 
 @code {
-    // public User User { get; set; } = new User();
     public UserLogin User { get; set; } = new UserLogin();
     public UserRegister User2 = new UserRegister();
-    private async void HandleLogin(LoginArgs args, string announcement)
+    private async void HandleLogin()
     {
-        await LocalStorage.SetItemAsync<string>("username", args.Username);
-        await AuthStateProvider.GetAuthenticationStateAsync();
-        NavigationManager.NavigateTo("");
+        if (User.Email == null || User.Password == null)
+        {
+
+        }
+        else
+        {
+            User2 = await UserService.LoginUser(User.Email + " " + User.Password);
+            if (User2.Name == "demo1234")
+            {
+                NavigationManager.NavigateTo("/register");
+            }
+            else
+            {
+                await LocalStorage.SetItemAsync<string>("username", User.Email);
+                await AuthStateProvider.GetAuthenticationStateAsync();
+                NavigationManager.NavigateTo("");
+            }
+        }
     }
 
     void OnRegister()
     {
         NavigationManager.NavigateTo("/register");
-        //Console.WriteLine($"{name} -> Register");
+
     }
 
-    public async Task OnChange()
-    {
-        User2 = await UserService.LoginUser(User.Email);
-        Console.WriteLine(User2.Email);
-    }
 }

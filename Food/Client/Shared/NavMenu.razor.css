@@ -60,3 +60,38 @@
         display: block;
     }
 }
+
+.page_title {
+    padding: 0px 0px;
+}
+
+    .page_title h3 {
+        color: white;
+        font-weight: 700;
+        line-height: 2;
+        margin-bottom: 0;
+        position: relative;
+        text-transform: capitalize;
+    }
+
+        .page_title h3::before {
+            background: white;
+            width: 70px;
+            height: 2px;
+            position: absolute;
+            content: '';
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .page_title h3::after {
+            position: absolute;
+            content: '';
+            background: #fbc531;
+            width: 30px;
+            height: 2px;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
