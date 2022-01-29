@@ -3,6 +3,9 @@
 @inject IProductService ProductService
 @inject NavigationManager NavigationManager
 @implements IDisposable
+@inject ICategoryService CategoryService
+@inject ILocalStorageService LocalStorageLogin
+@inject AuthenticationStateProvider AuthStateProvider  
 
 <BlazoredTypeahead SearchMethod="@SearchProduct"
                    TValue="Product"
@@ -21,11 +24,27 @@
         Sorry, there weren't any products found.
     </NotFoundTemplate>
 </BlazoredTypeahead>
+<AuthorizeView>
+                <Authorized>
+                    
+                    <RadzenProfileMenu Click="@(args => ChooseFunc(args))">
+                        <Template>
+                            <RadzenGravatar Email="projektwat19@gmail.com">
+                            </RadzenGravatar>
+                        </Template>
+                        <ChildContent>
+                            <RadzenProfileMenuItem style="margin:0; width:150px;" Text="Profile" Path="profile" Icon="account_circle"></RadzenProfileMenuItem>
+                            <RadzenProfileMenuItem style="text-decoration:none; margin:20px; width:150px;" Text="Log out" Path="" Icon="line_weight"></RadzenProfileMenuItem>
+                        </ChildContent>
+                    </RadzenProfileMenu>
+                </Authorized>
+            </AuthorizeView>
     <a href="cart" class="btn btn-info">
         <i class="oi oi-cart"></i>
         Cart
         <span class="badge badge-pill badge-light">@GetProductCount()</span>
     </a>
+    
 
 @code {
     private Product selectedProduct;
@@ -39,7 +58,22 @@
     {
         CartService.OnChange -= StateHasChanged;
     }
+    private async void Logout()
+    {
+        await  LocalStorageLogin.RemoveItemAsync("username");
+        await AuthStateProvider.GetAuthenticationStateAsync();
+        NavigationManager.NavigateTo("/");
+    }
+    void ChooseFunc(RadzenProfileMenuItem e)
+    {
+        if (e.Text == "Log out")
+        {
+            Logout();
+        }
+        else if(e.Text == "Profile")
+            Console.WriteLine("Profile");
 
+    }
     private int GetProductCount()
     {
         var cart = LocalStorage.GetItem<List<ProductVariant>>("cart");
