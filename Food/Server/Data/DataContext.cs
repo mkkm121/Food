@@ -23,6 +23,9 @@ namespace Food.Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserRegister>(entity => {
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
             modelBuilder.Entity<ProductVariant>().HasKey(p=> new { p.ProductId, p.EditionId });
 
             modelBuilder.Entity<Category>().HasData(

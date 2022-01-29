@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220128225912_Users")]
-    partial class Users
+    [Migration("20220129114823_UserUniq")]
+    partial class UserUniq
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -660,7 +660,7 @@ namespace Food.Server.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -683,6 +683,9 @@ namespace Food.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

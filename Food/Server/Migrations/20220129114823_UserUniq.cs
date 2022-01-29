@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Food.Server.Migrations
 {
-    public partial class Users : Migration
+    public partial class UserUniq : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,7 @@ namespace Food.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -206,6 +206,12 @@ namespace Food.Server.Migrations
                 name: "IX_ProductVariant_EditionId",
                 table: "ProductVariant",
                 column: "EditionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
