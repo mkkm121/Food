@@ -2,6 +2,7 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthStateProvider
+@inject IUserService UserService
 @using Food.Shared
 @using Food.Client.Pages
 
@@ -19,15 +20,15 @@
 
     </div>
     <RadzenButton Click=@(args => OnRegister()) Text="Register" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" />
-    <button type="submit" class="btn btn-primary" onclick="OnRegister">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
 
 
 
 @code {
-   // public User User { get; set; } = new User();
+    // public User User { get; set; } = new User();
     public UserLogin User { get; set; } = new UserLogin();
-
+    public UserRegister User2 = new UserRegister();
     private async void HandleLogin(LoginArgs args, string announcement)
     {
         await LocalStorage.SetItemAsync<string>("username", args.Username);
@@ -41,15 +42,9 @@
         //Console.WriteLine($"{name} -> Register");
     }
 
-    void OnResetPassword(string value, string name)
+    public async Task OnChange()
     {
-       // Console.WriteLine($"{name} -> ResetPassword for user: {value}");
-    }
-
-      void OnChange()
-    {
-
-        Console.WriteLine("xxxxxxxx");
-        Console.WriteLine(User.Email);
+        User2 = await UserService.LoginUser(User.Email);
+        Console.WriteLine(User2.Email);
     }
 }

@@ -2,65 +2,67 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthStateProvider
+@inject IUserService UserService
 @using Food.Shared
 @using Food.Client.Pages
 
 <EditForm Model="User" OnValidSubmit="OnChange">
-       <DataAnnotationsValidator />
+    <DataAnnotationsValidator />
     <div class="form-group">
         <label for="username">Username</label>
         <InputText id="username" @bind-Value="User.Name" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.Name)" />
+        <ValidationMessage For="@(() => User.Name)" />
     </div>
     <div class="form-group">
         <label for="email">Email</label>
         <InputText id="email" @bind-Value="User.Email" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.Email)" />
+        <ValidationMessage For="@(() => User.Email)" />
     </div>
-      <div class="form-group">
+    <div class="form-group">
         <label for="password">Password</label>
         <InputText id="password" @bind-Value="User.Password" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.Password)" />
+        <ValidationMessage For="@(() => User.Password)" />
     </div>
     <div class="form-group">
         <label for="phone">Phone</label>
         <InputText type="phone" id="Phone" @bind-Value="User.Phone" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.Phone)" />
+        <ValidationMessage For="@(() => User.Phone)" />
     </div>
     <div class="form-group">
         <label for="street">Street</label>
         <InputText type="street" id="street" @bind-Value="User.Street" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.Street)" />
+        <ValidationMessage For="@(() => User.Street)" />
     </div>
     <div class="form-group">
         <label for="city">City</label>
         <InputText type="city" id="city" @bind-Value="User.City" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.City)" />
+        <ValidationMessage For="@(() => User.City)" />
     </div>
     <div class="form-group">
         <label for="postcode">PostCode</label>
         <InputText type="postcode" id="postcode" @bind-Value="User.PostCode" class="form-control"></InputText>
-         <ValidationMessage For="@(() => User.PostCode)" />
+        <ValidationMessage For="@(() => User.PostCode)" />
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
 </EditForm>
 
 @code {
-   // public User User { get; set; } = new User();
+    // public User User { get; set; } = new User();
     public UserRegister User { get; set; } = new UserRegister();
-   
+
     string value;
 
-       void OnRegister(string name)
+    void OnRegister()
     {
+        UserService.CreateUser(User);
         NavigationManager.NavigateTo("/register");
-        //Console.WriteLine($"{name} -> Register");
     }
 
     void OnChange()
     {
-
-        Console.WriteLine("xxxxxxxx");
-        Console.WriteLine(User.Name);
+        Console.WriteLine(User.Name + "On change");
+        UserService.CreateUser(User);
+        Console.WriteLine(User.Name + "after On change");
+        NavigationManager.NavigateTo("/login");
     }
 }

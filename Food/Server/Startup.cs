@@ -1,4 +1,4 @@
-
+using Food.Server.Services.UserService;
 using Food.Server.Data;
 using Food.Server.Services.CategoryService;
 using Food.Server.Services.ProductService;
@@ -35,6 +35,7 @@ namespace Food.Server
             services.AddRazorPages();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

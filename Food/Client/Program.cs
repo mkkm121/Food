@@ -14,11 +14,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Food.Client.Services.CartService;
-using Food.Client.Services.CategoryService;
-using Food.Client.Services.ProductService;
-using Blazored.LocalStorage;
-using Blazored.Toast;
+
 
 namespace Food.Client
 {

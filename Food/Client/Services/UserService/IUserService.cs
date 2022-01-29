@@ -10,9 +10,7 @@ namespace Food.Client.Services.UserService
 {
     public interface IUserService
     {
-         /*
-        Task CreateUser();
-        Task<User> GetUser(int id);
-         */
+        Task CreateUser(UserRegister user);
+        Task<UserRegister> LoginUser(string Email);
     }
 }
