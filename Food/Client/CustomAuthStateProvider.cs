@@ -21,12 +21,12 @@ namespace Food.Client
         {
             var state = new AuthenticationState(new ClaimsPrincipal());
 
-            string username = await _localStorage.GetItemAsStringAsync("username");
-            if (!string.IsNullOrEmpty(username))
+            string email = await _localStorage.GetItemAsStringAsync("email");
+            if (!string.IsNullOrEmpty(email))
             {
                 var identity = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim(ClaimTypes.Name, email)
                 }, "test authentication type");
 
                 state = new AuthenticationState(new ClaimsPrincipal(identity));

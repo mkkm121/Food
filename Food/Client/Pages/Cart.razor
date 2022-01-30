@@ -1,6 +1,7 @@
 ﻿@page "/cart"
 @inject ICartService CartService
 @inject NavigationManager navigationManager
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 @if (!orderPlaced)
 {
@@ -33,6 +34,58 @@
             <div class="item-price">
                 Total (@cartItems.Count): $@cartItems.Sum(item => item.Price * item.Quantity)
             </div>
+            <RadzenFieldset Text="You can edit your info/delivery address here">
+                    <RadzenTabs SelectedIndex="0">
+                        <Tabs>
+                            <RadzenTabsItem Text="Contact Info">
+                                  <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-4 align-items-center d-flex">
+                                        <RadzenLabel Text="Name" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <RadzenTextBox Value="@(localStorage.GetItem<string>("name"))" style="width: 100%;" Name="Name" />
+                                    </div>
+                                </div>
+                                  <div class="row">
+                                    <div class="col-md-4 align-items-center d-flex">
+                                        <RadzenLabel  Text="Email" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <RadzenTextBox Value="@(localStorage.GetItem<string>("email"))" style="width: 100%;" Name="Email" />
+                                    </div>
+                                </div>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Delivery Details">
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-4 align-items-center d-flex">
+                                        <RadzenLabel Text="Street / Home Number">
+                                        </RadzenLabel>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <RadzenTextBox Value="@(localStorage.GetItem<string>("street"))" style="width: 100%;" Name="Address1" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-4 align-items-center d-flex">
+                                        <RadzenLabel  Text="City / Postal Code" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <RadzenTextBox Value="@(localStorage.GetItem<string>("city") + " " +localStorage.GetItem<string>("postcode"))" style="width: 100%;" Name="Address2" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 align-items-center d-flex">
+                                        <RadzenLabel  Text="Special Request" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <RadzenTextBox Placeholder="Add note ..." style="width: 100%;" Name="Special" />
+                                    </div>
+                                </div>
+                            </RadzenTabsItem>
+                        </Tabs>
+                    </RadzenTabs>
+                </RadzenFieldset>
+            
             <div style="text-align: center; margin-top: 10px;">
                 <RadzenButton Click=@(args => PlaceOrder()) Text="Order" Icon="check" ButtonStyle="ButtonStyle.Success" />
             </div>

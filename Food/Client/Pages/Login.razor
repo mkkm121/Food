@@ -43,7 +43,12 @@
             }
             else
             {
-                await LocalStorage.SetItemAsync<string>("username", User.Email);
+                await LocalStorage.SetItemAsync<string>("name", User2.Name);
+                await LocalStorage.SetItemAsync<string>("email", User2.Email);
+                await LocalStorage.SetItemAsync<string>("city", User2.City);
+                await LocalStorage.SetItemAsync<string>("phone", User2.Phone);
+                await LocalStorage.SetItemAsync<string>("postcode", User2.PostCode);
+                await LocalStorage.SetItemAsync<string>("street", User2.Street);
                 await AuthStateProvider.GetAuthenticationStateAsync();
                 NavigationManager.NavigateTo("");
             }

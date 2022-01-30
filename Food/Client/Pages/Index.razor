@@ -2,7 +2,7 @@
 @page "/{categoryurl}"
 @inject ICategoryService CategoryService;
 @inject IProductService ProductService
-@inject ISyncLocalStorageService LocalStorage
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 @if (category != null)
 {
@@ -16,7 +16,7 @@ else
             <h1>Welcome to our restaurant!</h1>
         </NotAuthorized>
         <Authorized>
-            <h1>Welcome back, @LocalStorage.GetItemAsString("username")!</h1>
+            <h1>Welcome back <b style="background-image:  linear-gradient(-90deg, #c0392b 55%, #fbc531 100%); padding:5px; color:  white">@(localStorage.GetItem<string>("name"))</b>!</h1>
         </Authorized>
     </AuthorizeView>
     <ProductList />

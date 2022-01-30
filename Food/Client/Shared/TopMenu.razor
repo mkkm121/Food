@@ -60,7 +60,13 @@
     }
     private async void Logout()
     {
-        await  LocalStorageLogin.RemoveItemAsync("username");
+        await  LocalStorageLogin.RemoveItemAsync("name");
+        await  LocalStorageLogin.RemoveItemAsync("email");
+        await  LocalStorageLogin.RemoveItemAsync("city");
+        await  LocalStorageLogin.RemoveItemAsync("phone");
+        await  LocalStorageLogin.RemoveItemAsync("postcode");
+        await  LocalStorageLogin.RemoveItemAsync("street");
+        await  LocalStorageLogin.ClearAsync();
         await AuthStateProvider.GetAuthenticationStateAsync();
         NavigationManager.NavigateTo("/");
     }
