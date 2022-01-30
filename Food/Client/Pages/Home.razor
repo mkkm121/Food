@@ -1,8 +1,117 @@
 ﻿@page "/"
 @page "/Home"
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
-<h3>Home</h3>
+<style>
+    .sc-media {
+  display: flex;
+}
 
+.sc-media  li {
+  list-style: none;
+}
+
+.sc-media  li a {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 80px;
+  font-size: 35px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+}
+.sc-media  li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+.setbox{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+.sc-media  li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+.sc-media li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+.sc-media  li a:hover:before {
+  top: 0;
+}
+
+.sc-media  li:nth-child(1) a:before{
+  background: #3b5999;
+}
+
+.sc-media  li:nth-child(2) a:before{
+  background: #55acee;
+}
+
+.sc-media  li:nth-child(3) a:before {
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); ;
+}
+
+.sc-media  li:nth-child(4) a:before {
+  background: #dd4b39;
+}
+</style>
+ <AuthorizeView>
+        <NotAuthorized>
+            <h1>Welcome to our restaurant!</h1>
+        </NotAuthorized>
+        <Authorized>
+            <h1>Welcome back <b style="background-image:  linear-gradient(-90deg, #c0392b 55%, #fbc531 100%); padding:5px; color:  white">@(localStorage.GetItem<string>("name"))</b>!</h1>
+        </Authorized>
+    </AuthorizeView>
+    <div class="setbox">
+            <RadzenImage Path="https://svgshare.com/i/do9.svg" Style="bottom:0; height:300px; width:300px;">
+            </RadzenImage>
+                <div style="margin:9vh 10vw; text-align:center;">
+               <h1 style="color: #ff3300;font-family: Food">Skontaktuj sie z nami!</h1><br>
+                <p>Ulica 11, 96-111 Warszawa</p><br>
+                <p>snackzen0@gmail.com</p><br>
+                <p>(+48) 123 456 789</p><br>
+                </div>
+                <div style="margin:9vh 10vw; text-align:center;">
+            <h1 style="color: #ff3300;font-family: Food">Nasze social media</h1><br>
+                <div class="sc-media">
+                  <li><a href="#"><i class="fab fa-facebook-f icon"></i></a></li>
+                  <li><a href="#"><i class="fab fa-twitter icon"></i></a></li>
+                  <li><a href="#"><i class="fab fa-instagram icon"></i></a></li>
+                  <li><a href="#"><i class="fab fa-youtube icon"></i></a></li>
+                </div>
+                </div>
+</div>
+            
+<div class="row p-3">
+    <div class="col">
+        <RadzenGoogleMap style="height: 300px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 52.25, Lng = 21 })>
+            <Markers>
+                <RadzenGoogleMapMarker Title="Our Restaurant" Position=@(new GoogleMapPosition() { Lat = 52.2531867, Lng = 20.897501}) />
+            </Markers>
+        </RadzenGoogleMap>
+    </div>
+</div>
 @code {
-
+        int zoom = 12;
 }
