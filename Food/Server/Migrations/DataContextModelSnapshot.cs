@@ -43,28 +43,28 @@ namespace Food.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Icon = "snack",
+                            Icon = "icecream",
                             Name = "Snacks",
                             Url = "snacks"
                         },
                         new
                         {
                             Id = 2,
-                            Icon = "dinner",
+                            Icon = "lunch_dining",
                             Name = "Dinners",
                             Url = "dinners"
                         },
                         new
                         {
                             Id = 3,
-                            Icon = "supper",
+                            Icon = "brunch_dining",
                             Name = "Suppers",
                             Url = "suppers"
                         },
                         new
                         {
                             Id = 4,
-                            Icon = "breakfas",
+                            Icon = "breakfast_dining",
                             Name = "Breakfasts",
                             Url = "breakfasts"
                         });
@@ -100,7 +100,7 @@ namespace Food.Server.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            DateCreated = new DateTime(2022, 1, 29, 16, 10, 50, 442, DateTimeKind.Local).AddTicks(2472),
+                            DateCreated = new DateTime(2022, 1, 30, 14, 31, 52, 822, DateTimeKind.Local).AddTicks(6243),
                             OrderId = 1,
                             PaymentMode = "Cart"
                         });
@@ -124,37 +124,17 @@ namespace Food.Server.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Default"
+                            Name = "Small"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "With beef"
+                            Name = "Medium"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "With pork"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "With goat"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "With lamb"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Vegan"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "With seafood"
+                            Name = "Big"
                         });
                 });
 
@@ -434,11 +414,11 @@ namespace Food.Server.Migrations
                             Id = 20,
                             CategoryID = 1,
                             DateCreated = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            Image = "",
+                            Description = "Donut",
+                            Image = "https://images.pexels.com/photos/867452/pexels-photo-867452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                             IsDeleted = false,
                             IsPublic = false,
-                            Title = ""
+                            Title = "Donut"
                         },
                         new
                         {
@@ -510,30 +490,51 @@ namespace Food.Server.Migrations
                         new
                         {
                             ProductId = 1,
+                            EditionId = 1,
+                            OriginalPrice = 9.99m,
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 1,
                             EditionId = 2,
-                            OriginalPrice = 19.99m,
-                            Price = 9.99m
+                            OriginalPrice = 0m,
+                            Price = 12.99m
                         },
                         new
                         {
                             ProductId = 1,
                             EditionId = 3,
-                            OriginalPrice = 0m,
-                            Price = 7.99m
+                            OriginalPrice = 19.99m,
+                            Price = 15.99m
                         },
                         new
                         {
-                            ProductId = 1,
-                            EditionId = 4,
-                            OriginalPrice = 29.99m,
-                            Price = 19.99m
+                            ProductId = 2,
+                            EditionId = 1,
+                            OriginalPrice = 5.99m,
+                            Price = 3.99m
                         },
                         new
                         {
                             ProductId = 2,
                             EditionId = 2,
-                            OriginalPrice = 14.99m,
+                            OriginalPrice = 8.99m,
                             Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            EditionId = 3,
+                            OriginalPrice = 11.99m,
+                            Price = 10.99m
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 5.99m
                         },
                         new
                         {
@@ -544,164 +545,451 @@ namespace Food.Server.Migrations
                         },
                         new
                         {
+                            ProductId = 3,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
                             ProductId = 4,
                             EditionId = 1,
-                            OriginalPrice = 249.00m,
-                            Price = 166.66m
+                            OriginalPrice = 14.00m,
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            EditionId = 2,
+                            OriginalPrice = 18.00m,
+                            Price = 14.66m
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            EditionId = 3,
+                            OriginalPrice = 24.00m,
+                            Price = 20.66m
                         },
                         new
                         {
                             ProductId = 5,
                             EditionId = 1,
-                            OriginalPrice = 299m,
-                            Price = 159.99m
+                            OriginalPrice = 8m,
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            EditionId = 2,
+                            OriginalPrice = 11m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            EditionId = 3,
+                            OriginalPrice = 15m,
+                            Price = 12.99m
                         },
                         new
                         {
                             ProductId = 6,
                             EditionId = 1,
-                            OriginalPrice = 400m,
-                            Price = 73.74m
+                            OriginalPrice = 5m,
+                            Price = 3.74m
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            EditionId = 2,
+                            OriginalPrice = 8m,
+                            Price = 5.74m
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            EditionId = 3,
+                            OriginalPrice = 10m,
+                            Price = 7.74m
                         },
                         new
                         {
                             ProductId = 7,
-                            EditionId = 5,
-                            OriginalPrice = 29.99m,
-                            Price = 19.99m
+                            EditionId = 1,
+                            OriginalPrice = 12.99m,
+                            Price = 10.99m
                         },
                         new
                         {
                             ProductId = 7,
-                            EditionId = 6,
-                            OriginalPrice = 0m,
-                            Price = 69.99m
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            EditionId = 7,
-                            OriginalPrice = 59.99m,
-                            Price = 49.99m
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            EditionId = 5,
-                            OriginalPrice = 24.99m,
-                            Price = 9.99m
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            EditionId = 5,
+                            EditionId = 2,
                             OriginalPrice = 0m,
                             Price = 14.99m
                         },
                         new
                         {
+                            ProductId = 7,
+                            EditionId = 3,
+                            OriginalPrice = 18.99m,
+                            Price = 16.99m
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            EditionId = 1,
+                            OriginalPrice = 7.99m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            EditionId = 2,
+                            OriginalPrice = 9.99m,
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            EditionId = 3,
+                            OriginalPrice = 12.99m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
                             ProductId = 10,
-                            EditionId = 4,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 10.99m
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            EditionId = 2,
                             OriginalPrice = 0m,
                             Price = 14.99m
                         },
                         new
                         {
                             ProductId = 11,
-                            EditionId = 4,
+                            EditionId = 3,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 16.99m
                         },
                         new
                         {
                             ProductId = 12,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 12.99m
                         },
                         new
                         {
                             ProductId = 13,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 12.99m
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 16.99m
                         },
                         new
                         {
                             ProductId = 14,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 11.99m
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 15.99m
                         },
                         new
                         {
                             ProductId = 15,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 11.99m
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 13.99m
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 16.99m
                         },
                         new
                         {
                             ProductId = 16,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 12.99m
                         },
                         new
                         {
                             ProductId = 17,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 12.99m
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 15.99m
                         },
                         new
                         {
                             ProductId = 18,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 8.99m
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 12.99m
                         },
                         new
                         {
                             ProductId = 19,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 4.99m
+                        },
+                        new
+                        {
+                            ProductId = 19,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 5.99m
+                        },
+                        new
+                        {
+                            ProductId = 19,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 6.99m
                         },
                         new
                         {
                             ProductId = 20,
-                            EditionId = 4,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 2.99m
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 3.99m
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 4.99m
+                        },
+                        new
+                        {
+                            ProductId = 21,
+                            EditionId = 1,
+                            OriginalPrice = 0m,
+                            Price = 10.99m
+                        },
+                        new
+                        {
+                            ProductId = 21,
+                            EditionId = 2,
                             OriginalPrice = 0m,
                             Price = 14.99m
                         },
                         new
                         {
                             ProductId = 21,
-                            EditionId = 4,
+                            EditionId = 3,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 18.99m
                         },
                         new
                         {
                             ProductId = 22,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 4.99m
+                        },
+                        new
+                        {
+                            ProductId = 22,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 22,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
                         },
                         new
                         {
                             ProductId = 23,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 23,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 23,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 9.99m
                         },
                         new
                         {
                             ProductId = 24,
-                            EditionId = 4,
+                            EditionId = 1,
                             OriginalPrice = 0m,
-                            Price = 14.99m
+                            Price = 3.99m
+                        },
+                        new
+                        {
+                            ProductId = 24,
+                            EditionId = 2,
+                            OriginalPrice = 0m,
+                            Price = 4.99m
+                        },
+                        new
+                        {
+                            ProductId = 24,
+                            EditionId = 3,
+                            OriginalPrice = 0m,
+                            Price = 6.99m
                         });
                 });
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Food.Server.Migrations
 {
-    public partial class Orders : Migration
+    public partial class Food : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -160,10 +160,10 @@ namespace Food.Server.Migrations
                 columns: new[] { "Id", "Icon", "Name", "Url" },
                 values: new object[,]
                 {
-                    { 1, "snack", "Snacks", "snacks" },
-                    { 2, "dinner", "Dinners", "dinners" },
-                    { 3, "supper", "Suppers", "suppers" },
-                    { 4, "breakfas", "Breakfasts", "breakfasts" }
+                    { 1, "icecream", "Snacks", "snacks" },
+                    { 2, "lunch_dining", "Dinners", "dinners" },
+                    { 3, "brunch_dining", "Suppers", "suppers" },
+                    { 4, "breakfast_dining", "Breakfasts", "breakfasts" }
                 });
 
             migrationBuilder.InsertData(
@@ -171,13 +171,9 @@ namespace Food.Server.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Default" },
-                    { 2, "With beef" },
-                    { 3, "With pork" },
-                    { 4, "With goat" },
-                    { 5, "With lamb" },
-                    { 6, "Vegan" },
-                    { 7, "With seafood" }
+                    { 1, "Small" },
+                    { 2, "Medium" },
+                    { 3, "Big" }
                 });
 
             migrationBuilder.InsertData(
@@ -188,7 +184,7 @@ namespace Food.Server.Migrations
             migrationBuilder.InsertData(
                 table: "CustomerOrders",
                 columns: new[] { "Id", "CustomerId", "DateCreated", "OrderId", "PaymentMode" },
-                values: new object[] { 1, 1, new DateTime(2022, 1, 29, 16, 10, 50, 442, DateTimeKind.Local).AddTicks(2472), 1, "Cart" });
+                values: new object[] { 1, 1, new DateTime(2022, 1, 30, 14, 31, 52, 822, DateTimeKind.Local).AddTicks(6243), 1, "Cart" });
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -216,7 +212,7 @@ namespace Food.Server.Migrations
                     { 23, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Chicken wings with barbecue sauce", "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "Chicken wings" },
                     { 22, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Nachos with salsa", "https://images.pexels.com/photos/9974358/pexels-photo-9974358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "Nachos" },
                     { 21, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Cheese board including gorgonzola, parmesan, chevre and camembert", "https://images.pexels.com/photos/6660056/pexels-photo-6660056.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "Cheese board" },
-                    { 20, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "", "", false, false, "" },
+                    { 20, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Donut", "https://images.pexels.com/photos/867452/pexels-photo-867452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "Donut" },
                     { 18, 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Pasta with chicken and cheese sauce", "https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "Pasta" },
                     { 19, 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "French fries with sauce", "https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", false, false, "French fries" }
                 });
@@ -226,34 +222,85 @@ namespace Food.Server.Migrations
                 columns: new[] { "EditionId", "ProductId", "OriginalPrice", "Price" },
                 values: new object[,]
                 {
-                    { 4, 19, 0m, 14.99m },
-                    { 1, 4, 249.00m, 166.66m },
+                    { 1, 19, 0m, 4.99m },
+                    { 1, 12, 0m, 7.99m },
+                    { 3, 11, 0m, 16.99m },
+                    { 2, 11, 0m, 14.99m },
+                    { 1, 11, 0m, 10.99m },
+                    { 3, 10, 0m, 8.99m },
+                    { 2, 10, 0m, 7.99m },
+                    { 2, 12, 0m, 9.99m },
+                    { 1, 10, 0m, 6.99m },
+                    { 2, 9, 0m, 8.99m },
+                    { 1, 9, 0m, 7.99m },
+                    { 3, 8, 12.99m, 9.99m },
+                    { 2, 8, 9.99m, 8.99m },
+                    { 1, 8, 7.99m, 7.99m },
+                    { 3, 7, 18.99m, 16.99m },
+                    { 3, 9, 0m, 9.99m },
+                    { 2, 7, 0m, 14.99m },
+                    { 3, 12, 0m, 12.99m },
+                    { 2, 1, 0m, 12.99m },
+                    { 1, 6, 5m, 3.74m },
+                    { 3, 5, 15m, 12.99m },
+                    { 2, 5, 11m, 9.99m },
+                    { 1, 5, 8m, 6.99m },
+                    { 3, 4, 24.00m, 20.66m },
+                    { 2, 4, 18.00m, 14.66m },
+                    { 1, 1, 9.99m, 6.99m },
+                    { 1, 4, 14.00m, 8.99m },
                     { 2, 3, 0m, 6.99m },
-                    { 2, 2, 14.99m, 7.99m },
-                    { 4, 1, 29.99m, 19.99m },
-                    { 3, 1, 0m, 7.99m },
-                    { 2, 1, 19.99m, 9.99m },
-                    { 4, 12, 0m, 14.99m },
-                    { 4, 11, 0m, 14.99m },
-                    { 4, 10, 0m, 14.99m },
-                    { 5, 9, 0m, 14.99m },
-                    { 5, 8, 24.99m, 9.99m },
-                    { 7, 7, 59.99m, 49.99m },
-                    { 6, 7, 0m, 69.99m },
-                    { 5, 7, 29.99m, 19.99m },
-                    { 4, 18, 0m, 14.99m },
-                    { 4, 17, 0m, 14.99m },
-                    { 4, 16, 0m, 14.99m },
-                    { 4, 15, 0m, 14.99m },
-                    { 4, 14, 0m, 14.99m },
-                    { 4, 13, 0m, 14.99m },
-                    { 4, 24, 0m, 14.99m },
-                    { 4, 23, 0m, 14.99m },
-                    { 4, 22, 0m, 14.99m },
-                    { 4, 21, 0m, 14.99m },
-                    { 4, 20, 0m, 14.99m },
-                    { 1, 5, 299m, 159.99m },
-                    { 1, 6, 400m, 73.74m }
+                    { 1, 3, 0m, 5.99m },
+                    { 3, 2, 11.99m, 10.99m },
+                    { 2, 2, 8.99m, 7.99m },
+                    { 1, 2, 5.99m, 3.99m },
+                    { 3, 1, 19.99m, 15.99m },
+                    { 3, 3, 0m, 7.99m },
+                    { 1, 7, 12.99m, 10.99m },
+                    { 3, 18, 0m, 12.99m },
+                    { 2, 18, 0m, 8.99m },
+                    { 3, 23, 0m, 9.99m },
+                    { 2, 23, 0m, 7.99m },
+                    { 1, 23, 0m, 6.99m },
+                    { 3, 22, 0m, 7.99m },
+                    { 2, 22, 0m, 6.99m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductVariant",
+                columns: new[] { "EditionId", "ProductId", "OriginalPrice", "Price" },
+                values: new object[,]
+                {
+                    { 1, 22, 0m, 4.99m },
+                    { 1, 24, 0m, 3.99m },
+                    { 3, 21, 0m, 18.99m },
+                    { 1, 21, 0m, 10.99m },
+                    { 3, 20, 0m, 4.99m },
+                    { 2, 20, 0m, 3.99m },
+                    { 1, 20, 0m, 2.99m },
+                    { 3, 19, 0m, 6.99m },
+                    { 2, 19, 0m, 5.99m },
+                    { 2, 21, 0m, 14.99m },
+                    { 2, 24, 0m, 4.99m },
+                    { 3, 24, 0m, 6.99m },
+                    { 1, 13, 0m, 8.99m },
+                    { 1, 18, 0m, 7.99m },
+                    { 3, 17, 0m, 15.99m },
+                    { 2, 17, 0m, 12.99m },
+                    { 1, 17, 0m, 9.99m },
+                    { 3, 16, 0m, 12.99m },
+                    { 2, 16, 0m, 9.99m },
+                    { 1, 16, 0m, 7.99m },
+                    { 3, 15, 0m, 16.99m },
+                    { 2, 15, 0m, 13.99m },
+                    { 1, 15, 0m, 11.99m },
+                    { 3, 14, 0m, 15.99m },
+                    { 2, 14, 0m, 11.99m },
+                    { 1, 14, 0m, 7.99m },
+                    { 3, 13, 0m, 16.99m },
+                    { 2, 13, 0m, 12.99m },
+                    { 2, 6, 8m, 5.74m },
+                    { 3, 6, 10m, 7.74m }
                 });
 
             migrationBuilder.CreateIndex(
