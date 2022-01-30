@@ -8,6 +8,10 @@ a, .btn-link {
     color: #0366d6;
 }
 
+@font-face {
+    font-family: Food;
+    src: url(Cafe_Francoise_D.otf);
+}
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;

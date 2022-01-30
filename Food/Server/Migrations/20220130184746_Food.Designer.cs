@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220130133153_Food")]
+    [Migration("20220130184746_Food")]
     partial class Food
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,8 +79,17 @@ namespace Food.Server.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("CustomerCity")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CustomerPostCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerStreet")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
@@ -102,9 +111,9 @@ namespace Food.Server.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            DateCreated = new DateTime(2022, 1, 30, 14, 31, 52, 822, DateTimeKind.Local).AddTicks(6243),
+                            DateCreated = new DateTime(2022, 1, 30, 19, 47, 45, 681, DateTimeKind.Local).AddTicks(2763),
                             OrderId = 1,
-                            PaymentMode = "Cart"
+                            PaymentMode = "Card"
                         });
                 });
 
@@ -148,6 +157,9 @@ namespace Food.Server.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<int>("EditionId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -157,7 +169,9 @@ namespace Food.Server.Migrations
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.HasKey("ProductId", "OrderId", "EditionId");
+
+                    b.HasIndex("EditionId");
 
                     b.HasIndex("OrderId");
 
@@ -1064,6 +1078,12 @@ namespace Food.Server.Migrations
 
             modelBuilder.Entity("Food.Shared.OrderDetail", b =>
                 {
+                    b.HasOne("Food.Shared.Edition", "edition")
+                        .WithMany()
+                        .HasForeignKey("EditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Food.Shared.CustomerOrder", "Order")
                         .WithMany("Products")
                         .HasForeignKey("OrderId")
@@ -1075,6 +1095,8 @@ namespace Food.Server.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("edition");
 
                     b.Navigation("Order");
 

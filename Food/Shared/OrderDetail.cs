@@ -15,6 +15,8 @@ namespace Food.Shared
         public CustomerOrder Order { get; set; }
 
         public int OrderId { get; set; }
+        public Edition edition { get; set; }
+        public int EditionId { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal SubTotal { get; set; }

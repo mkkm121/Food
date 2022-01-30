@@ -88,6 +88,9 @@ namespace Food.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CustomerStreet = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerPostCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PaymentMode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -134,17 +137,24 @@ namespace Food.Server.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
+                    EditionId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => new { x.ProductId, x.OrderId });
+                    table.PrimaryKey("PK_OrderDetails", x => new { x.ProductId, x.OrderId, x.EditionId });
                     table.ForeignKey(
                         name: "FK_OrderDetails_CustomerOrders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "CustomerOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Editions_EditionId",
+                        column: x => x.EditionId,
+                        principalTable: "Editions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -183,8 +193,8 @@ namespace Food.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "CustomerOrders",
-                columns: new[] { "Id", "CustomerId", "DateCreated", "OrderId", "PaymentMode" },
-                values: new object[] { 1, 1, new DateTime(2022, 1, 30, 14, 31, 52, 822, DateTimeKind.Local).AddTicks(6243), 1, "Cart" });
+                columns: new[] { "Id", "CustomerCity", "CustomerId", "CustomerPostCode", "CustomerStreet", "DateCreated", "OrderId", "PaymentMode" },
+                values: new object[] { 1, null, 1, null, null, new DateTime(2022, 1, 30, 19, 47, 45, 681, DateTimeKind.Local).AddTicks(2763), 1, "Card" });
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -307,6 +317,11 @@ namespace Food.Server.Migrations
                 name: "IX_CustomerOrders_CustomerId",
                 table: "CustomerOrders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_EditionId",
+                table: "OrderDetails",
+                column: "EditionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",

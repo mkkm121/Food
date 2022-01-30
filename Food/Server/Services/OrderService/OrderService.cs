@@ -36,6 +36,7 @@ namespace Food.Server.Services.OrderService
             {
                 orderDetail.OrderId = order.Id;
                 orderDetail.ProductId = item.ProductId;
+                orderDetail.EditionId = item.EditionId;
                 orderDetail.Quantity = item.Quantity;
                 orderDetail.Price = item.Price;
                 orderDetail.SubTotal = item.Quantity * item.Price;
@@ -53,7 +54,7 @@ namespace Food.Server.Services.OrderService
             {
                 generator = new Random();
                 OrderId = generator.Next(1, 1000000);
-                //if (!_context.CustomerOrders.Where(x => x.OrderId == OrderId).Any())
+                if (!_context.CustomerOrders.Where(x => x.OrderId == OrderId).Any())
                     break;
             }
             return OrderId;

@@ -29,7 +29,7 @@ namespace Food.Server.Data
                     entity.HasIndex(e => e.Email).IsUnique();
                 });
 
-                modelBuilder.Entity<OrderDetail>().HasKey(p => new { p.ProductId, p.OrderId });
+                modelBuilder.Entity<OrderDetail>().HasKey(p => new { p.ProductId, p.OrderId, p.EditionId });
 
                 modelBuilder.Entity<ProductVariant>().HasKey(p => new { p.ProductId, p.EditionId });
 
