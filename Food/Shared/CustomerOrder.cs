@@ -14,8 +14,10 @@ namespace Food.Shared
 
         public int CustomerId { get; set; }
         public List<OrderDetail> Products { get; set; } = new List<OrderDetail>();
-
+        public string CustomerStreet { get; set; }
+        public string CustomerCity { get; set; }
+        public string CustomerPostCode { get; set; }
         public DateTime? DateCreated { get; set; } = DateTime.Now;
-        public string PaymentMode { get; set; } = "Cart";
+        public string PaymentMode { get; set; } = "Card";
     }
 }

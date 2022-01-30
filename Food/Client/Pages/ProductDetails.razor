@@ -1,9 +1,8 @@
 ﻿@page "/product/{id:int}"
 @inject IProductService ProductService
-@inject ICartService CartService 
-@inject ILocalStorageService LocalStorage
-@inject IToastService ToastService 
-
+@inject ICartService CartService
+@inject IToastService ToastService
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 <div class="media">
     <div class="media-img-big-wrapper mr-2">
@@ -78,7 +77,7 @@
         cartItem.Price = productVariant.Price;
         cartItem.ProductId = productVariant.ProductId;
         cartItem.ProductTitle = product.Title;
-
+        cartItem.CustomerEmail = localStorage.GetItem<string>("email");
         await CartService.AddToCart(cartItem);
     }
 

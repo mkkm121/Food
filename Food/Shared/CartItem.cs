@@ -13,6 +13,10 @@ namespace Food.Shared
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public CustomerOrder Order { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerStreet { get; set; }
+        public string CustomerCity { get; set; }
+        public string CustomerPostCode { get; set; }
         public int OrderId { get; set; }
         public int EditionId { get; set; }
         public string ProductTitle { get; set; }

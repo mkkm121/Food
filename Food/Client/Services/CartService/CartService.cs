@@ -85,9 +85,8 @@ namespace Food.Client.Services.CartService
         }
         public async Task CreateCart()
         {
-            CustomerOrder order = new CustomerOrder { Id = 3, CustomerId = 1, OrderId = 12 };
-            Console.WriteLine(order.PaymentMode);
-            await _http.PostAsJsonAsync<CustomerOrder>("api/Cart", order);
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
+            await _http.PostAsJsonAsync<List<CartItem>>("api/order/new", cart);
         }
         public async Task EmptyCart()
         {

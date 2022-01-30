@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Food.Server.Services.CartService;
 using Food.Server.Services.PaymentService;
+using Food.Server.Services.OrderService;
 
 namespace Food.Server
 {
@@ -40,6 +41,7 @@ namespace Food.Server
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
