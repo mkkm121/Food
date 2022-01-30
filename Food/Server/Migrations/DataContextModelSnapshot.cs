@@ -83,6 +83,9 @@ namespace Food.Server.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerNote")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CustomerPostCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -109,7 +112,7 @@ namespace Food.Server.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            DateCreated = new DateTime(2022, 1, 30, 19, 47, 45, 681, DateTimeKind.Local).AddTicks(2763),
+                            DateCreated = new DateTime(2022, 1, 30, 22, 28, 37, 101, DateTimeKind.Local).AddTicks(5919),
                             OrderId = 1,
                             PaymentMode = "Card"
                         });
@@ -1032,7 +1035,8 @@ namespace Food.Server.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("PostCode")
                         .IsRequired()

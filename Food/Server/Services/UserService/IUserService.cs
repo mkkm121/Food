@@ -1,4 +1,5 @@
 ﻿using Food.Shared;
+using System;
 using System.Threading.Tasks;
 
 namespace Food.Server.Services.UserService
@@ -8,5 +9,6 @@ namespace Food.Server.Services.UserService
         Task AddNewUser(UserRegister user);
         Task<UserRegister> GetUser(string Email);
 
+        String sha256_hash(String value);
     }
 }

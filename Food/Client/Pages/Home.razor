@@ -36,6 +36,7 @@
 .setbox{
     display: flex;
     flex-direction:row;
+    justify-content: space-between;
     align-items: center;
 }
 .sc-media  li a:hover .icon {
@@ -86,13 +87,13 @@
     <div class="setbox">
             <RadzenImage Path="https://svgshare.com/i/do9.svg" Style="bottom:0; height:300px; width:300px;">
             </RadzenImage>
-                <div style="margin:9vh 10vw; text-align:center;">
+                <div style="text-align:center;">
                <h1 style="color: #ff3300;font-family: Food">Skontaktuj sie z nami!</h1><br>
                 <p>Ulica 11, 96-111 Warszawa</p><br>
                 <p>snackzen0@gmail.com</p><br>
                 <p>(+48) 123 456 789</p><br>
                 </div>
-                <div style="margin:9vh 10vw; text-align:center;">
+                <div style="text-align:center;">
             <h1 style="color: #ff3300;font-family: Food">Nasze social media</h1><br>
                 <div class="sc-media">
                   <li><a href="#"><i class="fab fa-facebook-f icon"></i></a></li>
@@ -105,7 +106,7 @@
             
 <div class="row p-3">
     <div class="col">
-        <RadzenGoogleMap style="height: 300px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 52.25, Lng = 21 })>
+        <RadzenGoogleMap style="height: 250px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 52.25, Lng = 21 })>
             <Markers>
                 <RadzenGoogleMapMarker Title="Our Restaurant" Position=@(new GoogleMapPosition() { Lat = 52.2531867, Lng = 20.897501}) />
             </Markers>

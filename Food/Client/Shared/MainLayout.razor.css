@@ -7,19 +7,7 @@
 .main {
     flex: 1;
 }
-/*
-    81AE9D    zielony jasny
-    #C4AF9A   khaki
-    #4F5D75 niebieski jasny
-    #3F612D  zielony ciemny
-    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    
-#603813
-→ 
-#b29f94
 
-    #c0392b;#fbc531;
-*/
 .sidebar {
     background: linear-gradient(180deg, #c0392b 75%, #fbc531 100%);
 }

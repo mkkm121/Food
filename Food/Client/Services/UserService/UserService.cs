@@ -6,16 +6,20 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Blazored.LocalStorage;
 
 namespace Food.Client.Services.UserService
 {
     public class UserService : IUserService
     {
+        private readonly ILocalStorageService _localStorage;
+
         private readonly HttpClient httpClient;
         public List<UserLogin> user { get; set; } = new List<UserLogin>();
         public event Action OnChange;
-        public UserService(HttpClient httpClient) {
+        public UserService(ILocalStorageService localStorage, HttpClient httpClient) {
             this.httpClient = httpClient;
+            _localStorage = localStorage;
         }
         public async Task CreateUser(UserRegister user)
         {
@@ -26,6 +30,7 @@ namespace Food.Client.Services.UserService
         {
             return await httpClient.GetFromJsonAsync<UserRegister>($"api/User/{Email}");
         }
+
 
     }
 }

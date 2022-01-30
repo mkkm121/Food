@@ -44,7 +44,7 @@ namespace Food.Server.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -91,6 +91,7 @@ namespace Food.Server.Migrations
                     CustomerStreet = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerPostCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerNote = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PaymentMode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -193,8 +194,8 @@ namespace Food.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "CustomerOrders",
-                columns: new[] { "Id", "CustomerCity", "CustomerId", "CustomerPostCode", "CustomerStreet", "DateCreated", "OrderId", "PaymentMode" },
-                values: new object[] { 1, null, 1, null, null, new DateTime(2022, 1, 30, 19, 47, 45, 681, DateTimeKind.Local).AddTicks(2763), 1, "Card" });
+                columns: new[] { "Id", "CustomerCity", "CustomerId", "CustomerNote", "CustomerPostCode", "CustomerStreet", "DateCreated", "OrderId", "PaymentMode" },
+                values: new object[] { 1, null, 1, null, null, null, new DateTime(2022, 1, 30, 22, 28, 37, 101, DateTimeKind.Local).AddTicks(5919), 1, "Card" });
 
             migrationBuilder.InsertData(
                 table: "Products",

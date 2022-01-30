@@ -22,7 +22,8 @@ namespace Food.Server.Services.OrderService
         {
             UserRegister user = _context.Users.FirstOrDefault(p => p.Email == cart[0].CustomerEmail);
             int _orderId = GenerateOrderId();
-            CustomerOrder order = new CustomerOrder { CustomerId = user.Id, OrderId = _orderId};
+            CustomerOrder order = new CustomerOrder { CustomerId = user.Id, OrderId = _orderId, CustomerCity = cart[0].CustomerCity, CustomerPostCode = cart[0].CustomerPostCode,
+                                                        CustomerStreet=cart[0].CustomerStreet, CustomerNote=cart[0].CustomerNote};
              _context.CustomerOrders.Add(order);
             _context.SaveChanges();
             CreateNewDetail(_orderId, cart);

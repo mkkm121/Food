@@ -33,15 +33,6 @@ namespace Food.Server.Data
 
                 modelBuilder.Entity<ProductVariant>().HasKey(p => new { p.ProductId, p.EditionId });
 
-
-                modelBuilder.Entity<UserRegister>().HasData(
-                   new UserRegister { Id = 1, Name = "admin", Password = "admin123", Email = "admin@admin.pl", Phone = "123456789", Street = "kunickiego 12", City = "Taszkient", PostCode = "21-123" }
-                   );
-
-                modelBuilder.Entity<CustomerOrder>().HasData(
-                    new CustomerOrder { Id = 1, CustomerId = 1, OrderId = 1 }
-                            );
-
                 modelBuilder.Entity<Category>().HasData(
                     new Category { Id = 1, Name = "Snacks", Url = "snacks", Icon = "icecream" },
                     new Category { Id = 2, Name = "Dinners", Url = "dinners", Icon = "lunch_dining" },

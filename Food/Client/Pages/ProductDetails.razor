@@ -77,7 +77,6 @@
         cartItem.Price = productVariant.Price;
         cartItem.ProductId = productVariant.ProductId;
         cartItem.ProductTitle = product.Title;
-        cartItem.CustomerEmail = localStorage.GetItem<string>("email");
         await CartService.AddToCart(cartItem);
     }
 

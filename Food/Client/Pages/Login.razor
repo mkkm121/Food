@@ -50,7 +50,7 @@
                 await LocalStorage.SetItemAsync<string>("postcode", User2.PostCode);
                 await LocalStorage.SetItemAsync<string>("street", User2.Street);
                 await AuthStateProvider.GetAuthenticationStateAsync();
-                NavigationManager.NavigateTo("");
+                NavigationManager.NavigateTo("/all");
             }
         }
     }

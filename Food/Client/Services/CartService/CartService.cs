@@ -49,6 +49,11 @@ namespace Food.Client.Services.CartService
             else
             {
                 sameItem.Quantity += item.Quantity;
+                sameItem.CustomerCity = item.CustomerCity;
+                sameItem.CustomerPostCode = item.CustomerPostCode;
+                sameItem.CustomerStreet = item.CustomerStreet;
+                sameItem.CustomerEmail = item.CustomerEmail;
+                sameItem.CustomerNote = item.CustomerNote;
             }
 
             await _localStorage.SetItemAsync("cart", cart);

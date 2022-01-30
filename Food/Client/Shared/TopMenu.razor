@@ -5,7 +5,8 @@
 @implements IDisposable
 @inject ICategoryService CategoryService
 @inject ILocalStorageService LocalStorageLogin
-@inject AuthenticationStateProvider AuthStateProvider  
+@inject AuthenticationStateProvider AuthStateProvider
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 <BlazoredTypeahead SearchMethod="@SearchProduct"
                    TValue="Product"
@@ -25,48 +26,76 @@
     </NotFoundTemplate>
 </BlazoredTypeahead>
 <AuthorizeView>
-                <Authorized>
-                    
-                    <RadzenProfileMenu Click="@(args => ChooseFunc(args))">
-                        <Template>
-                            <RadzenGravatar Email="projektwat19@gmail.com">
-                            </RadzenGravatar>
-                        </Template>
-                        <ChildContent>
-                            <RadzenProfileMenuItem style="margin:0; padding:0;  text-decoration:none; list-style:none; width:150px;" Text="Profile" Path="profile" Icon="account_circle"></RadzenProfileMenuItem>
-                            <RadzenProfileMenuItem style="margin:0; padding:0; text-decoration:none; list-style:none; width:150px;" Text="Log out" Path="" Icon="logout"></RadzenProfileMenuItem>
-                        </ChildContent>
-                    </RadzenProfileMenu>
-                </Authorized>
-            </AuthorizeView>
-    <a href="cart" class="btn btn-info">
-        <i class="oi oi-cart"></i>
-        Cart
-        <span class="badge badge-pill badge-light">@GetProductCount()</span>
-    </a>
-    
+    <Authorized>
+
+        <RadzenProfileMenu Click="@(args => ChooseFunc(args))">
+            <Template>
+                <RadzenGravatar Email="projektwat19@gmail.com">
+                </RadzenGravatar>
+            </Template>
+            <ChildContent>
+                <RadzenProfileMenuItem style="margin:0; padding:0;  text-decoration:none; list-style:none; width:150px;" Text="Profile" Path="profile" Icon="account_circle"></RadzenProfileMenuItem>
+                <RadzenProfileMenuItem style="margin:0; padding:0; text-decoration:none; list-style:none; width:150px;" Text="Log out" Path="" Icon="logout"></RadzenProfileMenuItem>
+            </ChildContent>
+        </RadzenProfileMenu>
+    </Authorized>
+</AuthorizeView>
+<AuthorizeView>
+    <Authorized>
+        <button @onclick="Cart" class="btn btn-info">
+            <i class="oi oi-cart"></i>
+            Cart
+            <span class="badge badge-pill badge-light">@GetProductCount()</span>
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="/login" class="btn btn-info">
+            <i class="oi oi-cart"></i>
+            Cart
+            <span class="badge badge-pill badge-light">@GetProductCount()</span>
+        </a>
+    </NotAuthorized>
+</AuthorizeView>
+
+
 
 @code {
     private Product selectedProduct;
+
+    public List<CartItem> cartItems = new List<CartItem> { };
 
     protected override void OnInitialized()
     {
         CartService.OnChange += StateHasChanged;
     }
-
+    public async Task Cart()
+    {
+        cartItems = localStorage.GetItem<List<CartItem>>("cart");
+        if(cartItems != null)
+        foreach (var cartItem in cartItems)
+        {
+            cartItem.Quantity -= cartItem.Quantity;
+            cartItem.CustomerCity = await LocalStorageLogin.GetItemAsync<string>("city");
+            cartItem.CustomerEmail = await LocalStorageLogin.GetItemAsync<string>("email");
+            cartItem.CustomerPostCode = await LocalStorageLogin.GetItemAsync<string>("postcode");
+            cartItem.CustomerStreet = await LocalStorageLogin.GetItemAsync<string>("street");
+            await CartService.AddToCart(cartItem);
+        }
+        NavigationManager.NavigateTo("/cart");
+    }
     public void Dispose()
     {
         CartService.OnChange -= StateHasChanged;
     }
     private async void Logout()
     {
-        await  LocalStorageLogin.RemoveItemAsync("name");
-        await  LocalStorageLogin.RemoveItemAsync("email");
-        await  LocalStorageLogin.RemoveItemAsync("city");
-        await  LocalStorageLogin.RemoveItemAsync("phone");
-        await  LocalStorageLogin.RemoveItemAsync("postcode");
-        await  LocalStorageLogin.RemoveItemAsync("street");
-        await  LocalStorageLogin.ClearAsync();
+        await LocalStorageLogin.RemoveItemAsync("name");
+        await LocalStorageLogin.RemoveItemAsync("email");
+        await LocalStorageLogin.RemoveItemAsync("city");
+        await LocalStorageLogin.RemoveItemAsync("phone");
+        await LocalStorageLogin.RemoveItemAsync("postcode");
+        await LocalStorageLogin.RemoveItemAsync("street");
+        await LocalStorageLogin.ClearAsync();
         await AuthStateProvider.GetAuthenticationStateAsync();
         NavigationManager.NavigateTo("/");
     }
@@ -76,7 +105,7 @@
         {
             Logout();
         }
-        else if(e.Text == "Profile")
+        else if (e.Text == "Profile")
             Console.WriteLine("Profile");
 
     }

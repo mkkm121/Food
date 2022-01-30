@@ -1,4 +1,4 @@
-﻿@page "/register"
+﻿@page "/editform"
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthStateProvider
@@ -42,7 +42,7 @@
         <InputText type="postcode" id="postcode" @bind-Value="User.PostCode" class="form-control"></InputText>
         <ValidationMessage For="@(() => User.PostCode)" />
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </EditForm>
 
 @code {
@@ -52,7 +52,7 @@
 
     void OnChange()
     {
-        UserService.CreateUser(User);
-        NavigationManager.NavigateTo("/login");
+        UserService.UpdateUser(User);
+        NavigationManager.NavigateTo("/profile");
     }
 }

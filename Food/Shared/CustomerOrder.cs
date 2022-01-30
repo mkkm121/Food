@@ -17,6 +17,7 @@ namespace Food.Shared
         public string CustomerStreet { get; set; }
         public string CustomerCity { get; set; }
         public string CustomerPostCode { get; set; }
+        public string CustomerNote { get; set; }
         public DateTime? DateCreated { get; set; } = DateTime.Now;
         public string PaymentMode { get; set; } = "Card";
     }
