@@ -37,7 +37,7 @@
         else
         {
             User2 = await UserService.LoginUser(User.Email + " " + User.Password);
-            if (User2.Name == "demo1234")
+            if (User2.Name == null)
             {
                 NavigationManager.NavigateTo("/register");
             }

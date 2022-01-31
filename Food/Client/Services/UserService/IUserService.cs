@@ -13,5 +13,6 @@ namespace Food.Client.Services.UserService
         Task CreateUser(UserRegister user);
         Task<UserRegister> LoginUser(string Email);
 
+        Task UpdatePassword(ChangePassword change);
     }
 }

@@ -23,11 +23,18 @@ namespace Food.Server.Services.UserService
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateUserPassword(ChangePassword change)
+        {
+            UserRegister user = await _context.Users.FirstOrDefaultAsync(p => p.Email == change.Email);
+            user.Password = sha256_hash(change.Password);
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+        }
         public async Task<UserRegister> GetUser(string Email)
         {
             string[] subs = Email.Split(' ');
 
-            UserRegister user2 = new UserRegister { Name = "demo1234", Password = "demo1234", Email = "demo1234@asd.pl", City = "demo1234", Phone = "demo1234", PostCode = "demo1234", Street = "demo1234" };
+            UserRegister user2 = new UserRegister { };
             UserRegister user = await _context.Users.FirstOrDefaultAsync(p => p.Email == subs[0] && p.Password == sha256_hash(subs[1]));
             if (user!=null)
                 return user;

@@ -31,5 +31,11 @@ namespace Food.Server.Controllers
         {
             return Ok(await _userService.GetUser(email));
         }
+        [HttpPost("changepassword")]
+        public async Task<ActionResult<Product>> PostUserPassword(ChangePassword change)
+        {
+            await _userService.UpdateUserPassword(change);
+            return Ok();
+        }
     }
 }

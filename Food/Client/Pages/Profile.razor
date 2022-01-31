@@ -2,6 +2,7 @@
 @using Microsoft.EntityFrameworkCore
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject IUserService UserService
+@inject NavigationManager NavigationManager
 <h1>User Profile</h1>
 
 
@@ -15,6 +16,17 @@
             <b>@(localStorage.GetItem<string>("name"))</b>
             <div class="mt-3">Email</div>
             <b>@(localStorage.GetItem<string>("email"))</b>
+        </div>
+        <div>
+            <div>
+                <button @onclick="ChangeName" class="btn-grad1">Edit Name</button>
+            </div>
+            <div style="margin-top: 35px">
+                <button @onclick="ChangeEmail" class="btn-grad1">Edit E-mail</button>
+            </div>
+            <div style="margin-top: 35px">
+                <button @onclick="ChangePassword" class="btn-grad1">Edit Password</button>
+            </div>
         </div>
     </div>
 </RadzenCard>
@@ -45,5 +57,16 @@
 
 
 @code {
-
+    public void ChangeName()
+    {
+        NavigationManager.NavigateTo("/changename");
+    }
+    public void ChangeEmail()
+    {
+        NavigationManager.NavigateTo("/changeemail");
+    }
+    public void ChangePassword()
+    {
+        NavigationManager.NavigateTo("/changepassword");
+    }
 }
