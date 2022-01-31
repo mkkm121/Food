@@ -37,5 +37,17 @@ namespace Food.Server.Controllers
             await _userService.UpdateUserPassword(change);
             return Ok();
         }
+        [HttpPost("changename")]
+        public async Task<ActionResult<ChangeName>> PostUserName(ChangeName change)
+        {
+            await _userService.UpdateUserName(change);
+            return Ok();
+        }
+        [HttpPost("changeinformation")]
+        public async Task<ActionResult<ChangeInfromation>> PostUserInformation(ChangeInfromation change)
+        {
+            await _userService.UpdateUserInformation(change);
+            return Ok();
+        }
     }
 }

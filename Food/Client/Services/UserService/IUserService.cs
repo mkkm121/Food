@@ -14,5 +14,7 @@ namespace Food.Client.Services.UserService
         Task<UserRegister> LoginUser(string Email);
 
         Task UpdatePassword(ChangePassword change);
+        Task UpdateInformation(ChangeInfromation change);
+        Task UpdateName(ChangeName change);
     }
 }

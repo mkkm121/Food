@@ -30,6 +30,23 @@ namespace Food.Server.Services.UserService
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateUserName(ChangeName change)
+        {
+            UserRegister user = await _context.Users.FirstOrDefaultAsync(p => p.Email == change.Email);
+            user.Name = change.Name;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+        }
+        public async Task UpdateUserInformation(ChangeInfromation change)
+        {
+            UserRegister user = await _context.Users.FirstOrDefaultAsync(p => p.Email == change.Email);
+            user.Street = change.Street;
+            user.Phone = change.Phone;
+            user.PostCode = change.PostCode;
+            user.City = change.City;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+        }
         public async Task<UserRegister> GetUser(string Email)
         {
             string[] subs = Email.Split(' ');

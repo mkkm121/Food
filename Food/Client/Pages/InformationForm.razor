@@ -1,0 +1,52 @@
+﻿@page "/changeinformation"
+@using Food.Shared
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject IUserService UserService
+
+<h3>Change your Profile Informations</h3>
+        <RadzenButton Click=@(args => Back()) Text="Back" Icon="arrow_back" ButtonStyle="ButtonStyle.Info" /><br />
+        <EditForm Model="change" OnValidSubmit="HandleChange">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="street">Street</label>
+                <InputText id="street" @bind-Value="change.Street" class="form-control"></InputText>
+                <ValidationMessage For="@(() => change.Street)" />
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <InputText id="city" @bind-Value="change.City" class="form-control"></InputText>
+                <ValidationMessage For="@(() => change.City)" />
+            </div>
+            <div class="form-group">
+                <label for="postcode">Postcode</label>
+                <InputText id="postcode" @bind-Value="change.PostCode" class="form-control"></InputText>
+                <ValidationMessage For="@(() => change.PostCode)" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <InputText id="phone" @bind-Value="change.Phone" class="form-control"></InputText>
+                <ValidationMessage For="@(() => change.Phone)" />
+            </div>
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Change" Icon="save" ButtonStyle="ButtonStyle.Info" />
+        </EditForm>
+@code {
+    ChangeInfromation change = new ChangeInfromation();
+
+
+    public void HandleChange()
+    {
+        change.Email = localStorage.GetItem<string>("email");
+        UserService.UpdateInformation(change);
+        localStorage.SetItem<string>("city", change.City);
+        localStorage.SetItem<string>("postcode", change.PostCode);
+        localStorage.SetItem<string>("phone", change.Phone);
+        localStorage.SetItem<string>("street", change.Street);
+        NavigationManager.NavigateTo("/profile");
+    }
+    public void Back()
+    {
+        NavigationManager.NavigateTo("/profile");
+    }
+
+}

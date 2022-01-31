@@ -31,6 +31,16 @@ namespace Food.Client.Services.UserService
             await httpClient.PostAsJsonAsync<ChangePassword>("api/User/changepassword", change);
             OnChange.Invoke();
         }
+        public async Task UpdateName(ChangeName change)
+        {
+            await httpClient.PostAsJsonAsync<ChangeName>("api/User/changename", change);
+            OnChange.Invoke();
+        }
+        public async Task UpdateInformation(ChangeInfromation change)
+        {
+            await httpClient.PostAsJsonAsync<ChangeInfromation>("api/User/changeinformation", change);
+            OnChange.Invoke();
+        }
         public async Task<UserRegister> LoginUser(string Email)
         {
             return await httpClient.GetFromJsonAsync<UserRegister>($"api/User/{Email}");

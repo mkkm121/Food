@@ -8,6 +8,8 @@ namespace Food.Server.Services.UserService
     {
         Task AddNewUser(UserRegister user);
         Task UpdateUserPassword(ChangePassword change);
+        Task UpdateUserInformation(ChangeInfromation change);
+        Task UpdateUserName(ChangeName change);
         Task<UserRegister> GetUser(string Email);
 
         String sha256_hash(String value);

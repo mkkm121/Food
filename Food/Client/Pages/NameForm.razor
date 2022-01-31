@@ -1,7 +1,33 @@
 ﻿@page "/changename"
+@using Food.Shared
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject IUserService UserService
 
 <h3>Change Your Name</h3>
+        <RadzenButton Click=@Back Text="Back" Icon="arrow_back" ButtonStyle="ButtonStyle.Info" /><br />
+        <EditForm Model="change" OnValidSubmit="HandleChange">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="name">New Name</label>
+                <InputText id="name" @bind-Value="change.Name" class="form-control"></InputText>
+                <ValidationMessage For="@(() => change.Name)" />
+            </div>
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Change" Icon="save" ButtonStyle="ButtonStyle.Info" />
+        </EditForm>
+
 
 @code {
-
+    ChangeName change = new ChangeName();
+    public void HandleChange()
+    {
+        change.Email = localStorage.GetItem<string>("email");
+        UserService.UpdateName(change);
+        localStorage.SetItem<string>("name",change.Name);
+        NavigationManager.NavigateTo("/profile");
+    }
+    public void Back()
+    {
+        NavigationManager.NavigateTo("/profile");
+    }
 }
