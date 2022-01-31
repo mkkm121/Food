@@ -40,7 +40,7 @@
             User2 = await UserService.LoginUser(User.Email + " " + User.Password);
             if (User2.Name == null)
             {
-                 await JsRuntime.InvokeVoidAsync("alert", "Wrong Password!"); // Alert
+                 await JsRuntime.InvokeVoidAsync("alert", "Wrong Email or Password!"); // Alert
             }
             else
             {

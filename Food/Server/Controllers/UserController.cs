@@ -27,12 +27,12 @@ namespace Food.Server.Controllers
             return Ok();
         }
         [HttpGet("{Email}")]
-        public async Task<ActionResult<Product>> GetUser(string email)
+        public async Task<ActionResult<UserRegister>> GetUser(string email)
         {
             return Ok(await _userService.GetUser(email));
         }
         [HttpPost("changepassword")]
-        public async Task<ActionResult<Product>> PostUserPassword(ChangePassword change)
+        public async Task<ActionResult<UserRegister>> PostUserPassword(ChangePassword change)
         {
             await _userService.UpdateUserPassword(change);
             return Ok();
