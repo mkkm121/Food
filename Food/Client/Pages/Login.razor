@@ -5,6 +5,7 @@
 @inject IUserService UserService
 @using Food.Shared
 @using Food.Client.Pages
+@inject IJSRuntime JsRuntime
 
 <EditForm Model="User" OnValidSubmit="HandleLogin">
     <DataAnnotationsValidator />
@@ -39,7 +40,7 @@
             User2 = await UserService.LoginUser(User.Email + " " + User.Password);
             if (User2.Name == null)
             {
-                NavigationManager.NavigateTo("/register");
+                 await JsRuntime.InvokeVoidAsync("alert", "Wrong Password!"); // Alert
             }
             else
             {
