@@ -86,7 +86,7 @@
                                         <RadzenLabel Text="Special Request" />
                                     </div>
                                     <div class="col-md-8">
-                                        <RadzenTextBox Placeholder="Add note ..." Change=@(args => OnChange(args, "note")) style="width: 100%;" Name="Special" />
+                                        <RadzenTextBox Placeholder="@note" Change=@(args => OnChange(args, "note")) style="width: 100%;" Name="Special" />
                                     </div>
                                 </div>
                                 <RadzenButton style="width: 160px" Icon="save" BusyText="Saving ..." IsBusy=@busy Click=@OnBusyClick Text="Save" />
